@@ -1,0 +1,8 @@
+Receipt #9
+Cashier name: bobi
+Date: 2025-20-05 17:52
+
+Items:
+
+Total: $0.00
+Thank you for your purchase!
