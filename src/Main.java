@@ -88,6 +88,7 @@ public class Main {
                                .append("\n");
 
                        product.decreaseQuantity(qty); // If the sale is successful, update the item's quantity
+                       SalesTracker.recordSale(product.getName(), qty);
 
                    }catch (ExpiredProductException e) {
                        System.out.println(e.getMessage());
@@ -105,7 +106,7 @@ public class Main {
                //After servicing a client,
                manager.saveProducts(); // Save updated quantities
                profitsAndSo.updateTotalSales(priceTotal);
-               profitsAndSo.updateTotalProfit(priceTotal-deliveryTotal);
+               profitsAndSo.updateTotalProfit(priceTotal-deliveryTotal); //call the funtion adding the data about sold items
                break;
            }
            else if(command.equals("3")) {
