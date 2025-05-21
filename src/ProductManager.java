@@ -34,6 +34,7 @@ public class ProductManager {
         }
     }
 
+    /*
     public void addProduct(Product p) {
         //Check if the product already exists, case-insensitive
         for(Product existing : products) {
@@ -43,6 +44,21 @@ public class ProductManager {
             }
         }
 
+        products.add(p);
+        saveProducts();
+    }
+    */
+
+    public void addProduct(Product p) {
+        //Check if the product already exists, case-insensitive, and if so - update the value
+        for (Product existing : products) {
+            if (existing.getName().equalsIgnoreCase(p.getName())) {
+                existing.decreaseQuantity(-p.getQuantity()); // adds quantity
+                System.out.println("Product \"" + p.getName() + "\" already exists. Quantity updated.");
+                saveProducts();
+                return;
+            }
+        }
         products.add(p);
         saveProducts();
     }
