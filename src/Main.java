@@ -6,7 +6,7 @@ public class Main {
     public static void main(String[] args) {
        Scanner scanner = new Scanner(System.in);
 
-       System.out.println("(1)Add products\n(2)Service a customer");
+       System.out.println("(1)Add products\n(2)Service a customer\n(3)Get the total number of receipts");
        String command = scanner.nextLine();
 
        while (true) {
@@ -106,6 +106,10 @@ public class Main {
                manager.saveProducts(); // Save updated quantities
                profitsAndSo.updateTotalSales(priceTotal);
                profitsAndSo.updateTotalProfit(priceTotal-deliveryTotal);
+               break;
+           }
+           else if(command.equals("3")) {
+               ReceiptGenerator.totalReceipts();
                break;
            }
        }

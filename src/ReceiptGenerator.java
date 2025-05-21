@@ -43,4 +43,10 @@ public class ReceiptGenerator {
             return 1;
         }
     }
+
+    //Save the number of receipts made to the current date
+    public static void totalReceipts() {
+        int totalReceipts = getNextReceiptNumber()-1;
+        System.out.println("Total receipts: " + totalReceipts);
+    }
 }
