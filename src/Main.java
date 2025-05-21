@@ -38,6 +38,17 @@ public class Main {
                manager.loadProducts();
                System.out.println("Enter your name: ");
                String cashierName = scanner.nextLine();
+
+               //Validating if you are a cashier in the store
+               if(!Cashierinfo.chashierExists(cashierName)) {
+                   try {
+                       throw new CashierNotFoundException("Cashier not in the database.");
+                   } catch (CashierNotFoundException e) {
+                       System.out.println(e.getMessage());
+                       return; // Exit the method to stop servicing
+                   }
+               }
+
                double priceTotal = 0.0;
                double deliveryTotal = 0.0;
                StringBuilder productDetails = new StringBuilder();

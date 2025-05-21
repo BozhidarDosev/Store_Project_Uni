@@ -17,6 +17,30 @@ public class Cashierinfo {
         saveCashierData();
     }
 
+    // checking if cashier's name exist in the DB, before proceeding with the order
+    public static boolean chashierExists(String nameToCheck) {
+        File file = new File(ID_FILE);
+        if (!file.exists()) return false;
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))){
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                if(parts.length >= 2) {
+                    String nameExisting = parts[1].trim().toLowerCase();
+                    String inputName = nameToCheck.trim().toLowerCase();
+
+                    if (inputName.equals(nameExisting)) {
+                        return true;
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     public String getName(){
         return name;
     }
