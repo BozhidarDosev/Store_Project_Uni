@@ -1,12 +1,13 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
        Scanner scanner = new Scanner(System.in);
 
-       System.out.println("(1)Add products\n(2)Service a customer\n(3)Get the total number of receipts");
+       System.out.println("(1)Add products\n(2)Service a customer\n(3)Get the total number of receipts\n(4)Hire a new cashier");
        String command = scanner.nextLine();
 
        while (true) {
@@ -111,6 +112,16 @@ public class Main {
            }
            else if(command.equals("3")) {
                ReceiptGenerator.totalReceipts();
+               break;
+           }
+           else if(command.equals("4")) {
+               System.out.println("Enter cashier's name and salary as: Name, salary");
+               String[] cashierNameAndSalary = scanner.nextLine().split(", ");
+               String cashierName = cashierNameAndSalary[0];
+               double cashierSalary = Double.parseDouble(cashierNameAndSalary[1]);
+
+               Cashierinfo cashierInfo = new Cashierinfo(cashierName, cashierSalary);
+
                break;
            }
        }
