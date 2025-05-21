@@ -1,9 +1,0 @@
-Receipt #18
-Cashier name: bobi
-Date: 2025-21-05 11:07
-
-Items:
-Cola x2 = $4.40
-
-Total: $4.40
-Thank you for your purchase!

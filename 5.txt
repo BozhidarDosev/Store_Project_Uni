@@ -1,9 +1,0 @@
-Receipt #5
-Cashier name: Bozxhidar
-Date: 2025-20-05 14:42
-
-Items:
-catfood x2 = $4.40
-
-Total: $4.40
-Thank you for your purchase!

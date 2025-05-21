@@ -2,21 +2,31 @@ import java.io.*;
 import java.nio.file.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.Comparator;
 
 public class ReceiptGenerator {
 
+    private static final String RECEIPT_DIR = "receipts";
+
     public static void saveReceipt(String cashierName, String productDetails, double totalPrice) {
-        //Save the current order's number
         int nextReceiptNumber = getNextReceiptNumber();
-        //Declare the file's name
         String fileName = nextReceiptNumber + ".txt";
-        //Create a template for date and time
+
+        // Ensure the directory exists
+        File dir = new File(RECEIPT_DIR);
+        if (!dir.exists()) {
+            dir.mkdirs(); // create the folder if it doesn't exist
+        }
+
+        // Date formatting
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-dd-MM HH:mm");
-        //Get the current date when and order has been executed successfully
         String formattedDate = LocalDateTime.now().format(formatter);
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
+        // File path now includes the receipts directory
+        File receiptFile = new File(dir, fileName);
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(receiptFile))) {
             writer.write("Receipt #" + nextReceiptNumber + "\n");
             writer.write("Cashier name: " + cashierName + "\n");
             writer.write("Date: " + formattedDate + "\n");
@@ -24,29 +34,34 @@ public class ReceiptGenerator {
             writer.write("Total: $" + String.format("%.2f", totalPrice) + "\n");
             writer.write("Thank you for your purchase!\n");
 
-            System.out.println("Receipt saved as: " + fileName);
+            System.out.println("Receipt saved as: " + receiptFile.getPath());
         } catch (IOException e) {
             System.err.println("Error writing receipt: " + e.getMessage());
         }
     }
 
-    //Method for finding the current order's number
     private static int getNextReceiptNumber() {
-        try {
-            return Files.list(Paths.get("."))
-                    .filter(p -> p.getFileName().toString().matches("\\d+\\.txt"))
-                    .map(p -> Integer.parseInt(p.getFileName().toString().replace(".txt", "")))
-                    .max(Comparator.naturalOrder())
-                    .orElse(0) + 1; //if it is the first receipt name it is "1"
-        }
-        catch (IOException e) {
-            return 1;
-        }
+        File dir = new File(RECEIPT_DIR);
+        if (!dir.exists()) return 1;
+
+        File[] receiptFiles = dir.listFiles((d, name) -> name.matches("\\d+\\.txt"));
+        if (receiptFiles == null || receiptFiles.length == 0) return 1;
+
+        return Arrays.stream(receiptFiles)
+                .map(f -> Integer.parseInt(f.getName().replace(".txt", "")))
+                .max(Integer::compare)
+                .orElse(0) + 1;
     }
 
-    //Save the number of receipts made to the current date
     public static void totalReceipts() {
-        int totalReceipts = getNextReceiptNumber()-1;
+        File dir = new File(RECEIPT_DIR);
+        if (!dir.exists()) {
+            System.out.println("Total receipts: 0");
+            return;
+        }
+
+        File[] receiptFiles = dir.listFiles((d, name) -> name.matches("\\d+\\.txt"));
+        int totalReceipts = (receiptFiles != null) ? receiptFiles.length : 0;
         System.out.println("Total receipts: " + totalReceipts);
     }
 }

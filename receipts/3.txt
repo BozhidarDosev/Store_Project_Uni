@@ -1,9 +1,9 @@
-Receipt #6
+Receipt #3
 Cashier name: Bozhidar
-Date: 2025-20-05 14:45
+Date: 2025-21-05 15:31
 
 Items:
-catfood x2 = $4.40
+FeinBread x2 = $4.40
 
 Total: $4.40
 Thank you for your purchase!

@@ -1,2 +1,2 @@
-Bread, 16
-FeinBread, 1
+Bread, 28
+FeinBread, 8

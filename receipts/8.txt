@@ -1,6 +1,6 @@
-Receipt #24
-Cashier name: sd
-Date: 2025-21-05 12:34
+Receipt #8
+Cashier name: bozhidar
+Date: 2025-21-05 15:38
 
 Items:
 Bread x2 = $4.40

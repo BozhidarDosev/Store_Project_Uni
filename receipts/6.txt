@@ -1,0 +1,9 @@
+Receipt #6
+Cashier name: bozhidar
+Date: 2025-21-05 15:34
+
+Items:
+FeinBread x3 = $6.60
+
+Total: $6.60
+Thank you for your purchase!

@@ -4,10 +4,3 @@
 4, BOBI, 100.0
 5, Bokata, 2.0
 6, Alice, 2000.0
-7, Alice, 2000.0
-8, Alice, 2000.0
-9, Alice, 2000.0
-10, Alice, 2000.0
-11, Alice, 2000.0
-12, Alice, 2000.0
-13, Alice, 2000.0

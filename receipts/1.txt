@@ -1,9 +1,9 @@
-Receipt #4
+Receipt #1
 Cashier name: Bozhidar
-Date: 2025-20-05 14:32
+Date: 2025-21-05 15:27
 
 Items:
-catfood x2 = $4.40
+Bread x2 = $4.40
 
 Total: $4.40
 Thank you for your purchase!

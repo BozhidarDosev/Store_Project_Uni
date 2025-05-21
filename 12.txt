@@ -1,9 +1,0 @@
-Receipt #12
-Cashier name: bobi
-Date: 2025-20-05 18:02
-
-Items:
-Bread x20 = $44.00
-
-Total: $44.00
-Thank you for your purchase!
