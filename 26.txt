@@ -1,0 +1,9 @@
+Receipt #26
+Cashier name: Bozhidar
+Date: 2025-21-05 14:10
+
+Items:
+Bread x1 = $2.20
+
+Total: $2.20
+Thank you for your purchase!

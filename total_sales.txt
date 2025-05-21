@@ -1,2 +1,7 @@
-total sales: 209.00
-total profit: 19.00
+total sales: 237.60
+total profit: 21.60
+
+May
+Total salaries: 1111.00
+Total profit from sales: 21.60
+Store profit: -1089.40
