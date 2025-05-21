@@ -62,7 +62,11 @@ public class Main {
                    }
                    //Find how much product you should order and save it stockToBeOrdered.txt
                    try {
-                       //if quantity is not enough throw an exception to remind to add more stock in storage
+                       //If the product had expired do not charge the customer and throw a message.
+                       if (product.getExpiryDate().isBefore(LocalDate.now())) {
+                           throw new ExpiredProductException("The product has expired. You will be not charged.");
+                       }
+                       //If quantity is not enough throw an exception to remind to add more stock in storage
                        if (qty > product.getQuantity()) {
                            int missing = qty - product.getQuantity();
                            throw new InsufficientProductQuantityException(product.getName(), missing);
@@ -85,7 +89,9 @@ public class Main {
 
                        product.decreaseQuantity(qty); // If the sale is successful, update the item's quantity
 
-                   } catch (InsufficientProductQuantityException e) {
+                   }catch (ExpiredProductException e) {
+                       System.out.println(e.getMessage());
+                   }catch (InsufficientProductQuantityException e) {
                        System.out.println(e.getMessage());
                        System.out.println("Suggestion: Order at least " + e.getMissingQuantity() + " more units of " + e.getProductName() + ".");
                        //Save the item's name and needed quantity to be ordered in the stockToBeOrdered.txt file

@@ -1,2 +1,2 @@
-total sales: 189.20
-total profit: 17.20
+total sales: 195.80
+total profit: 17.80
