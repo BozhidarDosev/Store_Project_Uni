@@ -3,7 +3,7 @@ import java.nio.file.*;
 
 public class profitsAndSo {
     private static final String FILE_NAME = "total_sales.txt";
-
+    //Variables for "oborot" and profit
     private static double totalSales = 0.0;
     private static double totalProfit = 0.0;
 
@@ -37,6 +37,7 @@ public class profitsAndSo {
         }
     }
 
+    //When a new order has been made, update sales and profits
     public static void updateTotalSales(double newSaleAmount) {
         totalSales += newSaleAmount;
         saveData();

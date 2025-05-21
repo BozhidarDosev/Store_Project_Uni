@@ -17,7 +17,7 @@ public class Product {
             throw new IllegalArgumentException("Expiry date cannot be before current date.");
         }
 
-        this.id = new Random().nextInt(100000); // Генериране на случайно ID
+        this.id = new Random().nextInt(100000); //Generate id
         this.name = name;
         this.category = category;
         this.deliveryPrice = deliveryPrice;

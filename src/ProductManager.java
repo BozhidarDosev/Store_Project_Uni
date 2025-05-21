@@ -2,6 +2,7 @@ import java.io.*;
 import java.util.*;
 
 public class ProductManager {
+    //Products will be saved here
     private List<Product> products = new ArrayList<>();
     private static final String FILE_NAME = "products.txt";
 
@@ -34,7 +35,7 @@ public class ProductManager {
     }
 
     public void addProduct(Product p) {
-        //проверка дали вече съществува такъв продукт
+        //Check if the product already exists, case-insensitive
         for(Product existing : products) {
             if(existing.getName().equalsIgnoreCase(p.getName())) {
                 System.out.println("Product with name \"" + p.getName() + "\" already exists. Not added.");

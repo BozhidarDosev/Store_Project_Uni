@@ -5,9 +5,10 @@ public class StockTracker {
     private static final String FILE_NAME = "stockToBeOrdered.txt";
 
     public static void recordMissingProduct(String productName, int missingQuantity) {
+        //product - needed amount to be ordered
         Map<String, Integer> stockMap = new HashMap<>();
 
-        // Четене на съществуващи записи
+        //reading the current data and saving it to the map
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -20,10 +21,10 @@ public class StockTracker {
             }
         } catch (IOException ignored) {}
 
-        // Добавяне или обновяване
+        //Adding or updating
         stockMap.put(productName, stockMap.getOrDefault(productName, 0) + missingQuantity);
 
-        // Запис обратно във файла
+        //saving the new data to the text file
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
             for (Map.Entry<String, Integer> entry : stockMap.entrySet()) {
                 writer.write(entry.getKey() + " - " + entry.getValue() + " units\n");

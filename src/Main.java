@@ -8,6 +8,7 @@ public class Main {
 
        System.out.println("(1)Add products\n(2)Service a customer");
        String command = scanner.nextLine();
+
        while (true) {
            if(command.equals("1")) {
                ProductManager manager = new ProductManager();
@@ -23,6 +24,7 @@ public class Main {
 
                   double price = Double.parseDouble(input[2]);
                   int quantity = Integer.parseInt(input[3]);
+                  //save the expiryDate of the product
                   LocalDate expiryDate = LocalDate.parse(input[4], DateTimeFormatter.ofPattern("dd-MM-yyyy"));
 
                   Product product = new Product(input[0], input[1], price, quantity, expiryDate);
@@ -38,6 +40,7 @@ public class Main {
                double priceTotal = 0.0;
                double deliveryTotal = 0.0;
                StringBuilder productDetails = new StringBuilder();
+               boolean isSuccessful = false;
 
                while (true) {
                    System.out.print("Enter product name (or 'done' to finish): ");
@@ -51,7 +54,6 @@ public class Main {
                    }
 
                    //validate if the quantity is available or if a positive number
-                   //if quantity is not enough throw an exception to remind to add more stock in storage
                    System.out.print("Enter quantity: ");
                    int qty = Integer.parseInt(scanner.nextLine());
                    if (qty <= 0){
@@ -60,12 +62,14 @@ public class Main {
                    }
                    //Find how much product you should order and save it stockToBeOrdered.txt
                    try {
+                       //if quantity is not enough throw an exception to remind to add more stock in storage
                        if (qty > product.getQuantity()) {
                            int missing = qty - product.getQuantity();
                            throw new InsufficientProductQuantityException(product.getName(), missing);
                        }
 
-                       // Само ако има достатъчно количество:
+                       //If the quantity is enough
+                       isSuccessful = true;
                        double itemTotal = product.getPrice() * qty;
                        double itemTotalDeliveryPrice = product.getDeliveryPrice() * qty;
 
@@ -79,38 +83,21 @@ public class Main {
                                .append(String.format("%.2f", itemTotal))
                                .append("\n");
 
-                       product.decreaseQuantity(qty); // Намаляваме количеството само при успешна продажба
+                       product.decreaseQuantity(qty); // If the sale is successful, update the item's quantity
 
                    } catch (InsufficientProductQuantityException e) {
                        System.out.println(e.getMessage());
                        System.out.println("Suggestion: Order at least " + e.getMissingQuantity() + " more units of " + e.getProductName() + ".");
-
+                       //Save the item's name and needed quantity to be ordered in the stockToBeOrdered.txt file
                        StockTracker.recordMissingProduct(e.getProductName(), e.getMissingQuantity());
-                       continue; // Продължаваме със следващия продукт
                    }
-
-                    /*
-                   double itemTotal = product.getPrice() * qty;
-                   double itemTotalDeliveryPrice = product.getDeliveryPrice() * qty;
-
-                   priceTotal += itemTotal;
-                   deliveryTotal += itemTotalDeliveryPrice;
-
-                   productDetails.append(product.getName())
-                           .append(" x")
-                           .append(qty)
-                           .append(" = $")
-                           .append(String.format("%.2f", itemTotal))
-                           .append("\n");
-
-                   product.decreaseQuantity(qty); // Optional: track inventory
-                    */
                }
-
-
-               ReceiptGenerator.saveReceipt(cashierName, productDetails.toString(), priceTotal);
+               //Create a receipt only if the sell was successful
+               if (isSuccessful) {
+                   ReceiptGenerator.saveReceipt(cashierName, productDetails.toString(), priceTotal);
+               }
+               //After servicing a client,
                manager.saveProducts(); // Save updated quantities
-
                profitsAndSo.updateTotalSales(priceTotal);
                profitsAndSo.updateTotalProfit(priceTotal-deliveryTotal);
                break;
