@@ -89,7 +89,7 @@ public class Main {
                        continue; // Продължаваме със следващия продукт
                    }
 
-
+                    /*
                    double itemTotal = product.getPrice() * qty;
                    double itemTotalDeliveryPrice = product.getDeliveryPrice() * qty;
 
@@ -104,7 +104,9 @@ public class Main {
                            .append("\n");
 
                    product.decreaseQuantity(qty); // Optional: track inventory
+                    */
                }
+
 
                ReceiptGenerator.saveReceipt(cashierName, productDetails.toString(), priceTotal);
                manager.saveProducts(); // Save updated quantities
